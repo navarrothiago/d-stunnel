@@ -26,18 +26,18 @@ then
 	usage
 else
 
-	CERT="fullchain.pem"
-	KEY="privkey.pem"
+	CERT="stunnel.pem"
+	KEY="stunnel.pem"
 
 	CONF="stunnel.conf"
-	THIS_CONF="stunnel.server.http.conf"
+	THIS_CONF="stunnel.server.http.ss.conf"
 
-	STARTSCRIPT="start_http_stunnel.sh"
-	DOCKERFILE="Dockerfile"
+	STARTSCRIPT="start_http_ss_stunnel.sh"
+	DOCKERFILE="Dockerfile.selfsigned"
 
 	if [ -f $CERT -a -f $KEY -a -f $THIS_CONF ]; then
 		$SED "s/PORT/${1}/g" ${THIS_CONF} > ${CONF}
-		$SED -i "s/EXPOSE [0-9]\{1,5\}/EXPOSE ${1}/g" ${DOCKERFILE}
+		# $SED -i "s/EXPOSE [0-9]\{1,5\}/EXPOSE ${1}/g" ${DOCKERFILE}
 		docker build -f ${DOCKERFILE} -t cmr_stunnel_http .
 
 	else

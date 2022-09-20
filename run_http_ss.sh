@@ -27,6 +27,7 @@ else
 		--network=host \
 		-p ${1}:${1} -p 22:22 \
 		-d \
+		--name http-stunnel \
 		-ti cmr_stunnel_http
 
 fi

@@ -1,0 +1,20 @@
+FROM ubuntu:20.04
+MAINTAINER charles@charlesreid1.com
+
+RUN mkdir -p /etc/stunnel
+VOLUME ["/etc/stunnel"]
+
+RUN apt-get update
+RUN apt-get -y install stunnel4
+RUN apt-get -y install net-tools
+
+ADD stunnel.conf /etc/stunnel/stunnel.conf
+ADD stunnel.pem /etc/stunnel/stunnel.stunnel.pem
+ADD stunnel.pem /etc/stunnel/stunnel.stunnel.pem
+
+ADD start_http_ss_stunnel.sh /start_stunnel.sh
+RUN chmod 600 /etc/stunnel/stunnel.stunnel.pem
+RUN chmod 600 /etc/stunnel/stunnel.stunnel.pem
+
+CMD ["/start_stunnel.sh"]
+
